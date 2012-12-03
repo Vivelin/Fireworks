@@ -6,3 +6,6 @@
 #include <cstdlib>
 #include <cstddef>
 #include <cmath>
+#include <vector>
+
+#include "Geometry.h"

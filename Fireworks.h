@@ -2,17 +2,11 @@
 #define _FIREWORKS
 
 #include "Libs.h"
-#include "Geometry.h"
-#include "Shader.h"
+#include "ParticleSystem.h"
 
 class Fireworks {
 public:
-	struct Particle {
-		Vector2 pos;
-		Color color;
-	};
-
-	Fireworks();
+	Fireworks(unsigned int width, unsigned int height, bool fullscreen);
 	~Fireworks();
 
 	unsigned int width;
@@ -26,6 +20,7 @@ public:
 
 private:
 	sf::Window *window;
+	ParticleSystem *particles;
 
 	void DoEvents();
 };

@@ -1,11 +1,22 @@
 #include "Libs.h"
 #include "Fireworks.h"
-#include "Geometry.h"
 #include "Shader.h"
 
-Fireworks::Fireworks() : width(1280), height(720), fullscreen(false) { }
+Fireworks::Fireworks(unsigned int width, unsigned int height, bool fullscreen) : width(width), height(height), fullscreen(fullscreen) {
+	particles = new ParticleSystem(width, height);
+}
 
-Fireworks::~Fireworks() { }
+Fireworks::~Fireworks() { 
+	if (window != NULL) {
+		delete window;
+		window = NULL;
+	}
+
+	if (particles != NULL) {
+		delete particles;
+		particles = NULL;
+	}
+}
 
 bool Fireworks::Load() {
 	// Create window
@@ -48,18 +59,38 @@ void Fireworks::DoEvents() {
 			break;
 
 		case sf::Event::KeyPressed:
-			if (windowEvent.Key.Code == sf::Key::Escape)
+			switch (windowEvent.Key.Code) {
+			case sf::Key::Escape:
 				window->Close();
+				break;
+
+			case sf::Key::Space:
+				particles->AddRandom();
+				break;
+			}
 			break;
 		}
 	}
 }
 
 void Fireworks::Update(float frametime) {
-	fprintf(stdout, "Frame time: %.4f ms\r", frametime);
+	fprintf(stdout, "Frame time: %.4f ms\t%u particle(s)\r", frametime, particles->Count());
+
+	if (particles->Count() < 300) {
+		particles->AddRandom();
+	}
+
+	particles->Update(frametime);
 }
 
 void Fireworks::Render() {
+	glViewport(0, 0, this->width, this->height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0f, this->width, this->height, 0.0f, -1.0f, 1.0f);
+
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	particles->Render();
 }
