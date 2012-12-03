@@ -13,7 +13,7 @@ public:
 
 	bool Load();
 	void Run();
-	void Update();
+	void Update(float frametime);
 	void Render();
 
 private:
