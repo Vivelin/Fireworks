@@ -70,10 +70,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Fireworks.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fireworks.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="Libs.h" />
+    <ClInclude Include="Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".\fragment.glsl">
+      <FileType>CppCode</FileType>
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include=".\vertex.glsl">
+      <FileType>CppCode</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

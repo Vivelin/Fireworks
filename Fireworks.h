@@ -1,15 +1,23 @@
 #ifndef _FIREWORKS
 #define _FIREWORKS
 
-#include <SFML/Window.hpp>
+#include "Libs.h"
+#include "Geometry.h"
+#include "Shader.h"
 
 class Fireworks {
 public:
+	struct Particle {
+		Vector3 pos;
+		Color color;
+	};
+
 	Fireworks();
 	~Fireworks();
 
 	unsigned int width;
 	unsigned int height;
+	bool fullscreen;
 
 	bool Load();
 	void Run();
@@ -19,8 +27,17 @@ public:
 private:
 	sf::Window *window;
 
+	Shader *vertexShader;
+	Shader *fragmentShader;
+	GLuint shaderProgram;
+
+	Vector3 viewpoint;
+	Vector3 viewtarget;
+	Matrix4 viewmatrix;
+	Matrix4 projectionmatrix;
+
 	void DoEvents();
 };
 
 
-#endif _FIREWORKS
+#endif
