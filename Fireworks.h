@@ -8,7 +8,7 @@
 class Fireworks {
 public:
 	struct Particle {
-		Vector3 pos;
+		Vector2 pos;
 		Color color;
 	};
 
@@ -26,15 +26,6 @@ public:
 
 private:
 	sf::Window *window;
-
-	Shader *vertexShader;
-	Shader *fragmentShader;
-	GLuint shaderProgram;
-
-	Vector3 viewpoint;
-	Vector3 viewtarget;
-	Matrix4 viewmatrix;
-	Matrix4 projectionmatrix;
 
 	void DoEvents();
 };
