@@ -2,7 +2,7 @@
 #include "Fireworks.h"
 #include "Shader.h"
 
-Fireworks::Fireworks(unsigned int width, unsigned int height, bool fullscreen) : width(width), height(height), fullscreen(fullscreen) {
+Fireworks::Fireworks(unsigned int width, unsigned int height, bool fullscreen) : width(width), height(height), fullscreen(fullscreen), maxParticles(300) {
 	particles = new ParticleSystem(width, height);
 }
 
@@ -76,7 +76,7 @@ void Fireworks::DoEvents() {
 void Fireworks::Update(float frametime) {
 	fprintf(stdout, "Frame time: %.4f ms\t%u particle(s)\r", frametime, particles->Count());
 
-	if (particles->Count() < 300) {
+	if (particles->Count() < this->maxParticles) {
 		particles->AddRandom();
 	}
 
@@ -93,4 +93,13 @@ void Fireworks::Render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	particles->Render();
+}
+
+
+void Fireworks::SetParticleLimit(size_t maxParticles) {
+    this->maxParticles = maxParticles;
+}
+
+size_t Fireworks::GetParticleLimit() const {
+    return this->maxParticles;
 }

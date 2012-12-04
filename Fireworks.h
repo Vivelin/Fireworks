@@ -18,9 +18,13 @@ public:
 	void Update(float frametime);
 	void Render();
 
+    void SetParticleLimit(size_t maxParticles);
+    size_t GetParticleLimit() const;
+
 private:
 	sf::Window *window;
 	ParticleSystem *particles;
+    size_t maxParticles;
 
 	void DoEvents();
 };

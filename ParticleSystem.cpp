@@ -15,7 +15,7 @@ void ParticleSystem::Update(float frametime) {
 		p.position -= Vector2(0.0f, -frametime * 30.0f);
 		p.size -= frametime;
 
-		if (p.size < 1.0f) {
+		if (p.size < 0.5f) {
 			i = list.erase(i);
 			if (i == list.end())
 				break;
