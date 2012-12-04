@@ -25,7 +25,7 @@ bool Fireworks::Load() {
 		style |= sf::Style::Fullscreen;
 
 	window = new sf::Window(sf::VideoMode(width, height), "Fireworks", style);
-	window->UseVerticalSync(true);
+	//window->UseVerticalSync(true);
 
 	// Initialize GLEW
 	glewExperimental = GL_TRUE;
@@ -74,7 +74,7 @@ void Fireworks::DoEvents() {
 }
 
 void Fireworks::Update(float frametime) {
-	fprintf(stdout, "Frame time: %.4f ms\t%u particle(s)\r", frametime, particles->Count());
+	fprintf(stdout, "Frame time: %.1f ms\t%u particle(s)\r", frametime * 1000.0f, particles->Count());
 
 	if (particles->Count() < this->maxParticles) {
 		particles->AddRandom();

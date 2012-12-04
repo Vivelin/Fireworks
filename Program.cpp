@@ -1,7 +1,7 @@
 #include "Libs.h"
 #include "Fireworks.h"
 
-#define PARTICLE_DENSITY 1000
+#define PARTICLE_DENSITY 1500
 
 int main(int argc, char *argv[]) {
 	srand(time(0));
@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     size_t particles = (width * height) / PARTICLE_DENSITY;
 
 	Fireworks fireworks(width, height, false);
-    fireworks.SetParticleLimit(900);
+    fireworks.SetParticleLimit(particles);
 	if (fireworks.Load()) {
 		fireworks.Run();
 		return EXIT_SUCCESS;

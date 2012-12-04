@@ -12,10 +12,9 @@ ParticleSystem::~ParticleSystem() {
 void ParticleSystem::Update(float frametime) {
 	for (auto i = list.begin(); i != list.end(); i++) {
 		Particle &p = *i;
-		p.position -= Vector2(0.0f, -frametime * 30.0f);
-		p.size -= frametime;
+		p.Update(frametime);
 
-		if (p.size < 0.5f) {
+		if (p.GetSize() < 0.5f) {
 			i = list.erase(i);
 			if (i == list.end())
 				break;
@@ -25,18 +24,8 @@ void ParticleSystem::Update(float frametime) {
 
 void ParticleSystem::Render() {
     for (Particle &p : list) {
-		RenderParticle(p);
+		p.Render();
 	}
-}
-
-void ParticleSystem::RenderParticle(Particle &p) {
-	glPointSize(p.size);
-	glBegin(GL_POINTS);
-
-	glColor4b(p.color.r(), p.color.g(), p.color.b(), p.color.a());
-	glVertex2f(p.position.x(), p.position.y());
-
-	glEnd();
 }
 
 void ParticleSystem::Add(const Particle &p) {
@@ -50,7 +39,10 @@ void ParticleSystem::AddRandom() {
 	int g = rand() % 255;
 	int b = rand() % 255;
 	Color color(r, g, b);
-	Add(Particle(pos, color, 6.0f));
+    float size = rand() % 4 + 4;
+    if (rand() % 100 == 0)
+        size += 12.0f;
+	Add(Particle(pos, color, size));
 }
 
 size_t ParticleSystem::Count() const {

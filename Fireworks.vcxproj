@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClCompile Include="Fireworks.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="Fireworks.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Libs.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
