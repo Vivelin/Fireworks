@@ -35,7 +35,8 @@ void ParticleSystem::Add(const Particle &p) {
 void ParticleSystem::AddRandom() {
 	Vector2 pos((float)(rand() % this->width), (float)(rand() % this->height));
 
-	Color color(rand() % 360, 1.0f, 1.0f);
+	double h = (rand() % 6) * 60; // Pick one of 6 random colors
+	Color color(h, 1.0f, 1.0f);
     float size = rand() % 4 + 4;
     if (rand() % 100 == 0)
         size += 12.0f;
