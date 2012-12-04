@@ -24,8 +24,8 @@ void ParticleSystem::Update(float frametime) {
 }
 
 void ParticleSystem::Render() {
-	for (auto i = list.begin(); i != list.end(); i++) {
-		RenderParticle(*i);
+    for (Particle &p : list) {
+		RenderParticle(p);
 	}
 }
 
