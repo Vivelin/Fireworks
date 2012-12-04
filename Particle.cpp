@@ -29,10 +29,10 @@ void Particle::Update(float frametime) {
     this->position -= Vector2(0.0f, -frametime * 30.0f);
 	this->size -= 2 * frametime;
 
-	if (this->color.Lightness > 0.5f)
+	if (this->color.Lightness > 0.66f)
 		this->color.Lightness -= frametime;
 	else
-		this->color.Lightness -= 0.25 * frametime;
+		this->color.Lightness -= 0.33 * frametime;
 }
 
 void Particle::Render() {

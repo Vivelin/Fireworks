@@ -100,9 +100,9 @@ void Fireworks::Render() {
 
 
 void Fireworks::SetParticleLimit(size_t maxParticles) {
-    this->maxParticles = maxParticles;
+	this->maxParticles = maxParticles;
 }
 
 size_t Fireworks::GetParticleLimit() const {
-    return this->maxParticles;
+	return this->maxParticles;
 }

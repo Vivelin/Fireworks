@@ -37,7 +37,7 @@ void ParticleSystem::AddRandom() {
 
 	double h = (rand() % 6) * 60; // Pick one of 6 random colors
 	Color color(h, 1.0f, 1.0f);
-    float size = rand() % 4 + 4;
+    float size = rand() % 4 + 4.0f;
     if (rand() % 100 == 0)
         size += 12.0f;
 	Add(Particle(pos, color, size));
