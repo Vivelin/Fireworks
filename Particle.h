@@ -4,10 +4,10 @@
 class Particle {
 public:
 	Particle() : 
-		position(0, 0), color(255, 255, 255), size(1.0f) {	}
+		position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f) {	}
 
 	Particle(Vector2 position) : 
-		position(position), color(255, 255, 255), size(1.0f) { }
+		position(position), color(0.0f, 0.0f, 0.0f), size(1.0f) { }
 
 	Particle(Vector2 position, Color color) : 
 		position(position), color(color), size(1.0f) { }

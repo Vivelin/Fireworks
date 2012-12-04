@@ -27,14 +27,20 @@ void Particle::SetSize(const float &f) {
 
 void Particle::Update(float frametime) {
     this->position -= Vector2(0.0f, -frametime * 30.0f);
-	this->size -= frametime;
+	this->size -= 2 * frametime;
+
+	if (this->color.Lightness > 0.5f)
+		this->color.Lightness -= frametime;
+	else
+		this->color.Lightness -= 0.25 * frametime;
 }
 
 void Particle::Render() {
     glPointSize(this->size);
 	glBegin(GL_POINTS);
 
-	glColor4b(this->color.r(), this->color.g(), this->color.b(), this->color.a());
+	RgbColor rgb = this->color.ToRGB();
+	glColor3d(rgb.Red, rgb.Green, rgb.Blue);
 	glVertex2f(this->position.x(), this->position.y());
 
 	glEnd();

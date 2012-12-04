@@ -50,7 +50,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-system-s-d.lib;sfml-window-s-d.lib;glew32sd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-s-d.lib;sfml-window-s-d.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,6 +69,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Fireworks.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -77,6 +78,7 @@
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Fireworks.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Libs.h" />

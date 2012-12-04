@@ -35,6 +35,9 @@ bool Fireworks::Load() {
 		return false;
 	}
 	fprintf(stdout, "Loaded GLEW %s\n", glewGetString(GLEW_VERSION));
+
+	glEnable(GL_POINT_SMOOTH);
+
 	return true;
 }
 

@@ -577,25 +577,3 @@ Matrix4 Matrix4::perspectiveMatrix(float fovy, float aspect, float znear, float 
 
 	return rm;
 }
-
-
-Color::Color() : cr(255), cg(255), cb(255), ca(255)
-{}
-Color::Color(byte r, byte g, byte b) : cr(r), cg(g), cb(b), ca(255)
-{}
-Color::Color(byte r, byte g, byte b, byte a) : cr(r), cg(g), cb(b), ca(a)
-{}
-Color::Color(int r, int g, int b) : cr(r), cg(g), cb(b), ca(255)
-{}
-Color::Color(int r, int g, int b, int a) : cr(r), cg(g), cb(b), ca(a)
-{}
-Color::Color(float r, float g, float b) : cr(byte(r / 255.0f)), cg(byte(g / 255.0f)), cb(byte(b / 255.0f)), ca(255)
-{}
-Color::Color(float r, float g, float b, float a) : cr(byte(r / 255.0f)), cg(byte(g / 255.0f)), cb(byte(b / 255.0f)), ca(byte(a / 255.0f))
-{}
-
-Color mix(const Color & c1, const Color & c2, float mix)
-{
-	return Color((unsigned char)(c1.cr * mix + c2.cr * (1.0f - mix)), (unsigned char)(c1.cg * mix + c2.cg * (1.0f - mix)),
-		(unsigned char)(c1.cb * mix + c2.cb * (1.0f - mix)), (unsigned char)(c1.ca * mix + c2.ca * (1.0f - mix)));
-}

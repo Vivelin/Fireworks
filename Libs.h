@@ -9,3 +9,6 @@
 #include <vector>
 
 #include "Geometry.h"
+#include "Color.h"
+
+typedef HslColor Color;

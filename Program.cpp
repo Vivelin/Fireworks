@@ -1,7 +1,7 @@
 #include "Libs.h"
 #include "Fireworks.h"
 
-#define PARTICLE_DENSITY 1500
+#define PARTICLE_DENSITY 2000
 
 int main(int argc, char *argv[]) {
 	srand(time(0));
