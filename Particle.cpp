@@ -1,6 +1,18 @@
 #include "Libs.h"
 #include "Particle.h"
 
+Particle::Particle(ParticleType type) : 
+	type(type), position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f) {	}
+
+Particle::Particle(ParticleType type, Vector2 position) : 
+	type(type), position(position), color(0.0f, 0.0f, 0.0f), size(1.0f) { }
+
+Particle::Particle(ParticleType type, Vector2 position, Color color) : 
+	type(type), position(position), color(color), size(1.0f) { }
+
+Particle::Particle(ParticleType type, Vector2 position, Color color, float size) : 
+	type(type), position(position), color(color), size(size) { }
+
 Vector2 Particle::GetPosition() const {
     return this->position;
 }
@@ -26,13 +38,21 @@ void Particle::SetSize(const float &f) {
 }
 
 void Particle::Update(float frametime) {
-    this->position -= Vector2(0.0f, -frametime * 30.0f);
-	this->size -= 2 * frametime;
+	switch (type) {
+	case ParticleType::Snow:
+		this->position -= Vector2(0.0f, -frametime * 30.0f);
 
-	if (this->color.Lightness > 0.66f)
-		this->color.Lightness -= frametime;
-	else
-		this->color.Lightness -= 0.33 * frametime;
+		if (this->size > 2.0f)
+			this->size -= 6 * frametime;
+		else
+			this->size -= 2 * frametime;
+
+		if (this->color.Lightness > 0.66f)
+			this->color.Lightness -= frametime;
+		else
+			this->color.Lightness -= 0.33 * frametime;
+		break;
+	}
 }
 
 void Particle::Render() {

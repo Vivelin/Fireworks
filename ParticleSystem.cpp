@@ -14,7 +14,7 @@ void ParticleSystem::Update(float frametime) {
 		Particle &p = *i;
 		p.Update(frametime);
 
-		if (p.GetColor().Lightness < 0.0f) {
+		if (p.GetColor().Lightness < 0.0f || p.GetSize() < 0.5f) {
 			i = list.erase(i);
 			if (i == list.end())
 				break;
@@ -35,12 +35,12 @@ void ParticleSystem::Add(const Particle &p) {
 void ParticleSystem::AddRandom() {
 	Vector2 pos((float)(rand() % this->width), (float)(rand() % this->height));
 
-	double h = (rand() % 6) * 60; // Pick one of 6 random colors
+	static double h = (rand() % 6) * 60; // Pick one of 6 random colors
 	Color color(h, 1.0f, 1.0f);
     float size = rand() % 4 + 4.0f;
     if (rand() % 100 == 0)
         size += 12.0f;
-	Add(Particle(pos, color, size));
+	Add(Particle(ParticleType::Snow, pos, color, size));
 }
 
 size_t ParticleSystem::Count() const {

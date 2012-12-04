@@ -1,19 +1,16 @@
 #pragma once
 #include "Libs.h"
 
+enum ParticleType {
+	Snow
+};
+
 class Particle {
 public:
-	Particle() : 
-		position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f) {	}
-
-	Particle(Vector2 position) : 
-		position(position), color(0.0f, 0.0f, 0.0f), size(1.0f) { }
-
-	Particle(Vector2 position, Color color) : 
-		position(position), color(color), size(1.0f) { }
-
-	Particle(Vector2 position, Color color, float size) : 
-		position(position), color(color), size(size) { }
+	Particle(ParticleType type);
+	Particle(ParticleType type, Vector2 position);
+	Particle(ParticleType type, Vector2 position, Color color);
+	Particle(ParticleType type, Vector2 position, Color color, float size);
 
     Vector2 GetPosition() const;
     void SetPosition(const Vector2 &v);
@@ -31,4 +28,5 @@ private:
 	Vector2 position;
 	Color color;
 	float size;
+	ParticleType type;
 };
