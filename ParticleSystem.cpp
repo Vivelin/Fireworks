@@ -44,8 +44,9 @@ void ParticleSystem::AddRandom() {
     float size = rand() % 4 + 4.0f;		 // Give a varied size
     if (rand() % 100 == 0)				 // 1% chance of an even bigger particle
         size += 12.0f;
-	float initialSpeed = -20.0f;		 // Particles have some initial speed
-	float force = -15.0f;				 // Particles move downwards
+
+	Vector2 initialSpeed = Vector2(0.0f, -20.0f); // Particles have some initial speed
+	Vector2 force = Vector2(-2.0f, -15.0f);  // Particles move downwards
 	Add(Particle(pos, color, size, initialSpeed, force));
 }
 

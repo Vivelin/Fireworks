@@ -7,8 +7,8 @@ public:
 	Particle(Vector2 position);
 	Particle(Vector2 position, Color color);
 	Particle(Vector2 position, Color color, float size);
-	Particle(Vector2 position, Color color, float size, float speed);
-	Particle(Vector2 position, Color color, float size, float speed, float force);
+	Particle(Vector2 position, Color color, float size, Vector2 speed);
+	Particle(Vector2 position, Color color, float size, Vector2 speed, Vector2 force);
 
     Vector2 GetPosition() const;
     void SetPosition(const Vector2 &v);
@@ -27,9 +27,9 @@ protected:
 	Color color;
 	float size;
 
-	float force;
-	float speed;
-	float acceleration;
+	Vector2 force;
+	Vector2 speed;
+	Vector2 acceleration;
 };
 
 class SpawnerParticle : public Particle {
