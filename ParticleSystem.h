@@ -13,7 +13,6 @@ public:
 	void Render();
 
 	void Add(const Particle &p);
-	void AddRandom();
 
 	size_t Count() const;
 

@@ -19,6 +19,8 @@ public:
     float GetSize() const;
     void SetSize(const float &f);
 
+	virtual bool IsAlive() const;
+
     virtual void Update(float frametime);
     virtual void Render();
 

@@ -43,6 +43,10 @@ void Particle::SetSize(const float &f) {
     this->size = f;
 }
 
+bool Particle::IsAlive() const {
+	return (this->size > 0.5f && this->color.Lightness > 0.0f);
+}
+
 void Particle::Update(float frametime) {
 	this->acceleration = this->force * this->size;
 	this->speed += acceleration * frametime;
