@@ -40,6 +40,8 @@ public:
 
 	Vector2 rotate(float rad) const;
 
+	bool within(float top, float left, float bottom, float right) const;
+
 private:
 	float e[2];
 };

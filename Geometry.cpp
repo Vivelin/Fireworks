@@ -120,7 +120,10 @@ Vector2 Vector2::rotate(float rad) const
 	return Vector2(e[0] * cos(rad) - e[1] * sin(rad), e[1] * cos(rad) + e[0] * sin(rad));
 }
 
-
+bool Vector2::within(float top, float left, float bottom, float right) const
+{
+	return (e[0] >= left && e[0] <= right && e[1] >= bottom && e[1] <= top);
+}
 
 Vector3::Vector3()
 {

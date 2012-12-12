@@ -89,7 +89,7 @@ void Fireworks::Render() {
 	glViewport(0, 0, this->width, this->height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0f, this->width, this->height, 0.0f, -1.0f, 1.0f);
+	glOrtho(0.0f, this->width, 0.0f, this->height, -1.0f, 1.0f);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -116,15 +116,15 @@ void Fireworks::AddRandomParticle() {
 	if (rand() % 100 == 0)				 // 1% chance of an even bigger particle
 		size += 12.0f;
 
-	Vector2 initialSpeed = Vector2(0.0f, -20.0f); // Particles have some initial speed
-	Vector2 force = Vector2(0.0f, -15.0f); // Particles move downwards
+	Vector2 initialSpeed = Vector2(0.0f, 20.0f); // Particles have some initial speed
+	Vector2 force = Vector2(0.0f, 15.0f); // Particles move downwards
 
 	Particle *p = new Particle(pos, color, size, initialSpeed, force);
 	particles->Add(p);
 }
 
 void Fireworks::AddSpawner() {
-	Vector2 pos((float)(rand() % this->width), (float)this->height);
+	Vector2 pos((float)(rand() % this->width), 0.0f);
 
 	static double h = (rand() % 6) * 60;
 	Color color(h, 1.0f, 0.5f);
@@ -132,7 +132,7 @@ void Fireworks::AddSpawner() {
 	float size = 15.0f;
 
 	Vector2 initialSpeed = Vector2(0.0f, 0.0f);
-	Vector2 force = Vector2(0.0f, 10.0f);
+	Vector2 force = Vector2(0.0f, -80.0f);
 
 	SpawnerParticle *p = new SpawnerParticle(pos, color, size, initialSpeed, force);
 	particles->Add(p);
