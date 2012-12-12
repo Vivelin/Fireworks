@@ -15,6 +15,8 @@ public:
 	void Update(float frametime);
 	void Render() const;
 
+	void Clear();
+
 	void Add(Particle *p);
 
 	size_t Count() const;

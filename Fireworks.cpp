@@ -70,6 +70,16 @@ void Fireworks::DoEvents() {
 			case sf::Key::Space:
 				AddSpawner();
 				break;
+			
+			case sf::Key::R:
+			case sf::Key::F5:
+				if (particles != NULL)
+					particles->Clear();
+				break;
+
+			case sf::Key::Return:
+				for (unsigned i = 0; i < 10; i++)
+					AddSpawner();
 			}
 			break;
 		}

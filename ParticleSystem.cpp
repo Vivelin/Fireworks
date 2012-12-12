@@ -5,11 +5,7 @@ ParticleSystem::ParticleSystem(unsigned int width, unsigned int height) :
 	width(width), height(height) { }
 
 ParticleSystem::~ParticleSystem() { 
-	auto i = list.begin();
-	while (i != list.end()) {
-		delete *i;
-		i = list.erase(i);
-	}
+	Clear();
 }
 
 unsigned int ParticleSystem::GetWidth() const {
@@ -39,6 +35,14 @@ void ParticleSystem::Update(float frametime) {
 void ParticleSystem::Render() const {
     for (Particle *p : list) {
 		p->Render();
+	}
+}
+
+void ParticleSystem::Clear() {
+	auto i = list.begin();
+	while (i != list.end()) {
+		delete *i;
+		i = list.erase(i);
 	}
 }
 
