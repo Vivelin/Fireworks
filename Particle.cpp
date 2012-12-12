@@ -1,5 +1,6 @@
 #include "Libs.h"
 #include "Particle.h"
+#include "ParticleSystem.h"
 
 Particle::Particle() : 
 	position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f), force(Vector2(0.0f, -15.0f)), lifetime(0.0f) { }
@@ -16,6 +17,10 @@ Particle::Particle(Vector2 position, Color color, float size, Vector2 speed, Vec
 
 ParticleType Particle::GetType() const {
 	return ParticleType::Spark;
+}
+
+void Particle::SetParent(ParticleSystem *parent) {
+	this->parent = parent;
 }
 
 Vector2 Particle::GetPosition() const {
@@ -68,7 +73,7 @@ void Particle::Update(float frametime) {
 		this->color.Lightness -= 0.33 * frametime;
 }
 
-void Particle::Render() {
+void Particle::Render() const {
     glPointSize(this->size);
 	glBegin(GL_POINTS);
 
@@ -80,26 +85,98 @@ void Particle::Render() {
 }
 
 SpawnerParticle::SpawnerParticle() : 
-	Particle() { }
+	Particle(), maxLifetime(5.0f), particles(NULL) { }
 SpawnerParticle::SpawnerParticle(Vector2 position) :
-	Particle(position) { }
+	Particle(position), maxLifetime(5.0f), particles(NULL) { }
 SpawnerParticle::SpawnerParticle(Vector2 position, Color color) :
-	Particle(position, color) { }
+	Particle(position, color), maxLifetime(5.0f), particles(NULL) { }
 SpawnerParticle::SpawnerParticle(Vector2 position, Color color, float size) :
-	Particle(position, color, size) { }
+	Particle(position, color, size), maxLifetime(5.0f), particles(NULL) { }
 SpawnerParticle::SpawnerParticle(Vector2 position, Color color, float size, Vector2 speed) : 
-	Particle(position, color, size, speed) { }
+	Particle(position, color, size, speed), maxLifetime(5.0f), particles(NULL) { }
 SpawnerParticle::SpawnerParticle(Vector2 position, Color color, float size, Vector2 speed, Vector2 force) :
-	Particle(position, color, size, speed, force) { }
+	Particle(position, color, size, speed, force), maxLifetime(5.0f), particles(NULL) { }
+
+SpawnerParticle::~SpawnerParticle() {
+	if (particles != NULL) {
+		delete particles;
+		particles = NULL;
+	}
+}
 
 ParticleType SpawnerParticle::GetType() const { 
 	return ParticleType::Spawner;
 }
 
+float SpawnerParticle::GetMaxLifetime() const {
+	return this->maxLifetime;
+}
+
+void SpawnerParticle::SetMaxLifetime(float maxLifetime) {
+	this->maxLifetime = maxLifetime;
+}
+
+float SpawnerParticle::GetFuseTime() const {
+	return this->fuseTime;
+}
+
+void SpawnerParticle::SetFuseTime(float time) {
+	this->fuseTime = time;
+}
+
 bool SpawnerParticle::IsAlive() const {
-	return (lifetime < 1.0f);
+	return (lifetime < maxLifetime);
 }
 
 void SpawnerParticle::Update(float frametime) {
 	DoPhysics(frametime);
+
+	if (lifetime > fuseTime && particles == NULL) {
+		Explode();
+	}
+	else if (particles != NULL) {
+		if (particles->Count() < maxParticles && lifetime < (maxLifetime - 2.0f))
+			SpawnParticle();
+
+		particles->Update(frametime);
+	}
+}
+
+void SpawnerParticle::Render() const {
+	Particle::Render();
+
+	if (particles != NULL) {
+		particles->Render();
+	}
+}
+
+void SpawnerParticle::Explode() {
+	if (particles == NULL) {
+		assert(parent != NULL);
+
+		particles = new ParticleSystem(parent->GetWidth(), parent->GetHeight());
+		this->color.Lightness = 0.0f;
+		this->force = Vector2();
+		this->acceleration = Vector2();
+		this->speed = Vector2();
+	}
+}
+
+void SpawnerParticle::SpawnParticle() {
+	if (particles != NULL && IsAlive()) {
+		Vector2 pos((float)(rand() % this->width), (float)(rand() % this->height));
+		pos += this->position - Vector2(this->width / 2.0f, this->height / 2.0f);
+
+		Color color(this->color.Hue, 1.0f, 1.0f);
+
+		float size = rand() % 4 + 4.0f;		 // Give a varied size
+		if (rand() % 100 == 0)				 // 1% chance of an even bigger particle
+			size += 12.0f;
+
+		Vector2 initialSpeed = Vector2(0.0f, 20.0f); // Particles have some initial speed
+		Vector2 force = Vector2(0.0f, 15.0f); // Particles move downwards
+
+		Particle *p = new Particle(pos, color, size, initialSpeed, force);
+		particles->Add(p);
+	}
 }

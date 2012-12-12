@@ -9,8 +9,11 @@ public:
 	ParticleSystem(unsigned int width, unsigned int height);
 	~ParticleSystem();
 
+	unsigned int GetWidth() const;
+	unsigned int GetHeight() const;
+
 	void Update(float frametime);
-	void Render();
+	void Render() const;
 
 	void Add(Particle *p);
 

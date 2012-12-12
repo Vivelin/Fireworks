@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cmath>
 #include <vector>
+#include <cassert>
 
 #include "Geometry.h"
 #include "Color.h"

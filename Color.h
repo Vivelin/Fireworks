@@ -23,6 +23,6 @@ public:
 
 	HslColor(double h, double s, double l);
 
-	RgbColor ToRGB();
+	RgbColor ToRGB() const;
 };
 

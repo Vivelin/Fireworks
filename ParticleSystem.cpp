@@ -12,6 +12,13 @@ ParticleSystem::~ParticleSystem() {
 	}
 }
 
+unsigned int ParticleSystem::GetWidth() const {
+	return this->width;
+}
+unsigned int ParticleSystem::GetHeight() const {
+	return this->height;
+}
+
 void ParticleSystem::Update(float frametime) {
 	for (auto i = list.begin(); i != list.end();) {
 		Particle *p = *i;
@@ -29,13 +36,14 @@ void ParticleSystem::Update(float frametime) {
 	}
 }
 
-void ParticleSystem::Render() {
+void ParticleSystem::Render() const {
     for (Particle *p : list) {
 		p->Render();
 	}
 }
 
 void ParticleSystem::Add(Particle *p) {
+	p->SetParent(this);
 	list.push_back(p);
 }
 

@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     size_t particles = (width * height) / PARTICLE_DENSITY;
 
 	Fireworks fireworks(width, height, false);
-    fireworks.SetParticleLimit(particles);
+    fireworks.SetParticleLimit(30);
 	if (fireworks.Load()) {
 		fireworks.Run();
 		return EXIT_SUCCESS;

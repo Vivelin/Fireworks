@@ -17,7 +17,7 @@ HslColor::HslColor(double h, double s, double l) : Saturation(s), Lightness(l) {
 	this->Hue = h - 360.0f * floor(h / 360.0f);
 }
 
-RgbColor HslColor::ToRGB() {
+RgbColor HslColor::ToRGB() const {
 	double chroma  = (1 - abs(2*Lightness - 1)) * Saturation;
 	double hh = Hue / 60;
 	double x = chroma * (1 - fabs(fmod(hh, 2) - 1));

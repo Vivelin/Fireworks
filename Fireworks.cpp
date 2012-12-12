@@ -80,7 +80,7 @@ void Fireworks::Update(float frametime) {
 	fprintf(stdout, "Frame time: %.1f ms\t%u particle(s)\r", frametime * 1000.0f, particles->Count());
 
 	if (particles->Count() < this->maxParticles) {
-		AddRandomParticle();
+		AddSpawner();
 	}
 
 	particles->Update(frametime);
@@ -127,7 +127,7 @@ void Fireworks::AddRandomParticle() {
 void Fireworks::AddSpawner() {
 	Vector2 pos((float)(rand() % this->width), 0.0f);
 
-	static double h = (rand() % 6) * 60;
+	double h = (rand() % 6) * 60;
 	Color color(h, 1.0f, 0.5f);
 
 	float size = 15.0f;
@@ -136,5 +136,6 @@ void Fireworks::AddSpawner() {
 	Vector2 force = Vector2(0.0f, -80.0f);
 
 	SpawnerParticle *p = new SpawnerParticle(pos, color, size, initialSpeed, force);
+	p->SetFuseTime(0.4f * (rand() / (float)RAND_MAX) + 0.6f);
 	particles->Add(p);
 }

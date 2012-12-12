@@ -6,6 +6,7 @@ enum ParticleType {
 	Spawner
 };
 
+class ParticleSystem;
 class Particle {
 public:
 	Particle();
@@ -16,6 +17,8 @@ public:
 	Particle(Vector2 position, Color color, float size, Vector2 speed, Vector2 force);
 
 	virtual ParticleType GetType() const;
+
+	void SetParent(ParticleSystem *parent);
 
     Vector2 GetPosition() const;
     void SetPosition(const Vector2 &v);
@@ -29,9 +32,10 @@ public:
 	virtual bool IsAlive() const;
 
     virtual void Update(float frametime);
-    virtual void Render();
+    virtual void Render() const;
 
 protected:
+	ParticleSystem *parent;
 	Vector2 position;
 	Color color;
 	float size;
@@ -53,10 +57,30 @@ public:
 	SpawnerParticle(Vector2 position, Color color, float size);
 	SpawnerParticle(Vector2 position, Color color, float size, Vector2 speed);
 	SpawnerParticle(Vector2 position, Color color, float size, Vector2 speed, Vector2 force);
+	~SpawnerParticle();
 
 	ParticleType GetType() const;
+
+	float GetMaxLifetime() const;
+	void SetMaxLifetime(float maxLifetime);
+
+	float GetFuseTime() const;
+	void SetFuseTime(float time);
 
 	bool IsAlive() const;
 
 	void Update(float frametime);
+	void Render() const;
+
+	void Explode();
+	void SpawnParticle();
+
+protected:
+	ParticleSystem *particles;
+	static const unsigned int width = 300;
+	static const unsigned int height = 200;
+	static const unsigned int maxParticles = 25;
+
+	float maxLifetime;
+	float fuseTime;
 };
