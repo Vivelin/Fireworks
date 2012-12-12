@@ -40,11 +40,13 @@ void ParticleSystem::AddRandom() {
 	Vector2 pos((float)(rand() % this->width), (float)(rand() % this->height));
 
 	static double h = (rand() % 6) * 60; // Pick one of 6 random colors
-	Color color(h, 1.0f, 1.0f);
-    float size = rand() % 4 + 4.0f;
-    if (rand() % 100 == 0)
+	Color color(h, 1.0f, 1.0f);			 // Particles start with a "flash"
+    float size = rand() % 4 + 4.0f;		 // Give a varied size
+    if (rand() % 100 == 0)				 // 1% chance of an even bigger particle
         size += 12.0f;
-	Add(Particle(pos, color, size, -20.0f));
+	float initialSpeed = -20.0f;		 // Particles have some initial speed
+	float force = -15.0f;				 // Particles move downwards
+	Add(Particle(pos, color, size, initialSpeed, force));
 }
 
 size_t ParticleSystem::Count() const {

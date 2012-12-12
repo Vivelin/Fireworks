@@ -2,19 +2,22 @@
 #include "Particle.h"
 
 Particle::Particle() : 
-	position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f), speed(0.0f), acceleration(0.0f) {	}
+	position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f), speed(0.0f), acceleration(0.0f), force(-15.0f) { }
 
 Particle::Particle(Vector2 position) : 
-	position(position), color(0.0f, 0.0f, 0.0f), size(1.0f), speed(0.0f), acceleration(0.0f) { }
+	position(position), color(0.0f, 0.0f, 0.0f), size(1.0f), speed(0.0f), acceleration(0.0f), force(-15.0f) { }
 
 Particle::Particle(Vector2 position, Color color) : 
-	position(position), color(color), size(1.0f), speed(0.0f), acceleration(0.0f) { }
+	position(position), color(color), size(1.0f), speed(0.0f), acceleration(0.0f), force(-15.0f) { }
 
 Particle::Particle(Vector2 position, Color color, float size) : 
-	position(position), color(color), size(size), speed(0.0f), acceleration(0.0f) { }
+	position(position), color(color), size(size), speed(0.0f), acceleration(0.0f), force(-15.0f) { }
 
 Particle::Particle(Vector2 position, Color color, float size, float speed) : 
-	position(position), color(color), size(size), speed(speed), acceleration(0.0f) { }
+	position(position), color(color), size(size), speed(speed), acceleration(0.0f), force(-15.0f) { }
+
+Particle::Particle(Vector2 position, Color color, float size, float speed, float force) : 
+	position(position), color(color), size(size), speed(speed), acceleration(0.0f), force(force) { }
 
 Vector2 Particle::GetPosition() const {
     return this->position;
