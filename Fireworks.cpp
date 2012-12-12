@@ -2,7 +2,8 @@
 #include "Fireworks.h"
 #include "Shader.h"
 
-Fireworks::Fireworks(unsigned int width, unsigned int height, bool fullscreen) : width(width), height(height), fullscreen(fullscreen), maxParticles(300) {
+Fireworks::Fireworks(unsigned int width, unsigned int height, bool fullscreen) : 
+	width(width), height(height), fullscreen(fullscreen), maxParticles(300) {
 	particles = new ParticleSystem(width, height);
 }
 

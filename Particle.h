@@ -40,6 +40,8 @@ protected:
 	Vector2 speed;
 	Vector2 acceleration;
 
+	float lifetime; // Lifetime in seconds
+
 	virtual void DoPhysics(float frametime);
 };
 

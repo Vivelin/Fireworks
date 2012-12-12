@@ -2,17 +2,17 @@
 #include "Particle.h"
 
 Particle::Particle() : 
-	position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f), force(Vector2(0.0f, -15.0f)) { }
+	position(0, 0), color(0.0f, 0.0f, 0.0f), size(1.0f), force(Vector2(0.0f, -15.0f)), lifetime(0.0f) { }
 Particle::Particle(Vector2 position) : 
-	position(position), color(0.0f, 0.0f, 0.0f), size(1.0f), force(Vector2(0.0f, -15.0f)) { }
+	position(position), color(0.0f, 0.0f, 0.0f), size(1.0f), force(Vector2(0.0f, -15.0f)), lifetime(0.0f) { }
 Particle::Particle(Vector2 position, Color color) : 
-	position(position), color(color), size(1.0f), force(Vector2(0.0f, -15.0f)) { }
+	position(position), color(color), size(1.0f), force(Vector2(0.0f, -15.0f)), lifetime(0.0f) { }
 Particle::Particle(Vector2 position, Color color, float size) : 
-	position(position), color(color), size(size), force(Vector2(0.0f, -15.0f)) { }
+	position(position), color(color), size(size), force(Vector2(0.0f, -15.0f)), lifetime(0.0f) { }
 Particle::Particle(Vector2 position, Color color, float size, Vector2 speed) : 
-	position(position), color(color), size(size), speed(speed), force(Vector2(0.0f, -15.0f)) { }
+	position(position), color(color), size(size), speed(speed), force(Vector2(0.0f, -15.0f)), lifetime(0.0f) { }
 Particle::Particle(Vector2 position, Color color, float size, Vector2 speed, Vector2 force) : 
-	position(position), color(color), size(size), speed(speed), force(force) { }
+	position(position), color(color), size(size), speed(speed), force(force), lifetime(0.0f) { }
 
 ParticleType Particle::GetType() const {
 	return ParticleType::Spark;
@@ -47,6 +47,8 @@ bool Particle::IsAlive() const {
 }
 
 void Particle::DoPhysics(float frametime) {
+	this->lifetime += frametime;
+
 	this->acceleration = this->force * this->size;
 	this->speed += acceleration * frametime;
 	this->position -= this->speed * frametime;
@@ -95,7 +97,7 @@ ParticleType SpawnerParticle::GetType() const {
 }
 
 bool SpawnerParticle::IsAlive() const {
-	return true;
+	return (lifetime < 1.0f);
 }
 
 void SpawnerParticle::Update(float frametime) {
