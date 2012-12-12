@@ -1,6 +1,5 @@
 #include "Libs.h"
 #include "Fireworks.h"
-#include "Shader.h"
 
 Fireworks::Fireworks(unsigned int width, unsigned int height, bool fullscreen) : 
 	width(width), height(height), fullscreen(fullscreen), maxParticles(300) {

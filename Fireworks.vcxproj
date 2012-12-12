@@ -75,7 +75,6 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
@@ -84,16 +83,6 @@
     <ClInclude Include="Libs.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="Shader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".\fragment.glsl">
-      <FileType>CppCode</FileType>
-      <DeploymentContent>false</DeploymentContent>
-    </None>
-    <None Include=".\vertex.glsl">
-      <FileType>CppCode</FileType>
-    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
