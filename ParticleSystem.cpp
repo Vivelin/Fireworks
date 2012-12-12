@@ -14,7 +14,7 @@ void ParticleSystem::Update(float frametime) {
 		Particle *p = *i;
 		p->Update(frametime);
 
-		if (!p->IsAlive() || p->GetPosition().within(0.0f, 0.0f, this->height, this->width)) {
+		if (!p->IsAlive() || !p->GetPosition().within(this->height, 0.0f, 0.0f, this->width)) {
 			i = list.erase(i);
 			if (i == list.end())
 				break;
