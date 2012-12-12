@@ -17,7 +17,7 @@ public:
 
 	size_t Count() const;
 
-private:
+protected:
 	std::vector<Particle> list;
 	unsigned int width;
 	unsigned int height;

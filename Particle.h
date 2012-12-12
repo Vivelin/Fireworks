@@ -1,16 +1,13 @@
 #pragma once
 #include "Libs.h"
 
-enum ParticleType {
-	Snow
-};
-
 class Particle {
 public:
-	Particle(ParticleType type);
-	Particle(ParticleType type, Vector2 position);
-	Particle(ParticleType type, Vector2 position, Color color);
-	Particle(ParticleType type, Vector2 position, Color color, float size);
+	Particle();
+	Particle(Vector2 position);
+	Particle(Vector2 position, Color color);
+	Particle(Vector2 position, Color color, float size);
+	Particle(Vector2 position, Color color, float size, float speed);
 
     Vector2 GetPosition() const;
     void SetPosition(const Vector2 &v);
@@ -21,12 +18,19 @@ public:
     float GetSize() const;
     void SetSize(const float &f);
 
-    void Update(float frametime);
-    void Render();
+    virtual void Update(float frametime);
+    virtual void Render();
 
-private:
+protected:
 	Vector2 position;
 	Color color;
 	float size;
-	ParticleType type;
+
+	float speed;
+	float acceleration;
+};
+
+class SpawnerParticle : public Particle {
+public:
+	void Update(float frametime);
 };

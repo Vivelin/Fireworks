@@ -4,7 +4,7 @@
 #define PARTICLE_DENSITY 2000
 
 int main(int argc, char *argv[]) {
-	srand(time(0));
+	srand((unsigned int)time(0));
 
     unsigned int width = 1280;
     unsigned int height = 720;

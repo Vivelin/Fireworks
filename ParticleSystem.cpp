@@ -10,7 +10,7 @@ ParticleSystem::~ParticleSystem() {
 }
 
 void ParticleSystem::Update(float frametime) {
-	for (auto i = list.begin(); i != list.end(); i++) {
+	for (auto i = list.begin(); i != list.end();) {
 		Particle &p = *i;
 		p.Update(frametime);
 
@@ -18,9 +18,13 @@ void ParticleSystem::Update(float frametime) {
 			i = list.erase(i);
 			if (i == list.end())
 				break;
+		} 
+		else {
+			i++;
 		}
 	}
 }
+
 
 void ParticleSystem::Render() {
     for (Particle &p : list) {
@@ -40,7 +44,7 @@ void ParticleSystem::AddRandom() {
     float size = rand() % 4 + 4.0f;
     if (rand() % 100 == 0)
         size += 12.0f;
-	Add(Particle(ParticleType::Snow, pos, color, size));
+	Add(Particle(pos, color, size, -20.0f));
 }
 
 size_t ParticleSystem::Count() const {
