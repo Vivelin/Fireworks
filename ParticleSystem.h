@@ -12,12 +12,12 @@ public:
 	void Update(float frametime);
 	void Render();
 
-	void Add(const Particle &p);
+	void Add(Particle *p);
 
 	size_t Count() const;
 
 protected:
-	std::vector<Particle> list;
+	std::vector<Particle*> list;
 	unsigned int width;
 	unsigned int height;
 };

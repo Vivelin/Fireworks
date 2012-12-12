@@ -54,5 +54,7 @@ public:
 
 	ParticleType GetType() const;
 
+	bool IsAlive() const;
+
 	void Update(float frametime);
 };

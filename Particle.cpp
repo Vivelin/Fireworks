@@ -94,6 +94,10 @@ ParticleType SpawnerParticle::GetType() const {
 	return ParticleType::Spawner;
 }
 
+bool SpawnerParticle::IsAlive() const {
+	return true;
+}
+
 void SpawnerParticle::Update(float frametime) {
 	DoPhysics(frametime);
 }

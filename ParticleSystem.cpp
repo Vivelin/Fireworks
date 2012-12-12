@@ -11,10 +11,11 @@ ParticleSystem::~ParticleSystem() {
 
 void ParticleSystem::Update(float frametime) {
 	for (auto i = list.begin(); i != list.end();) {
-		Particle &p = *i;
-		p.Update(frametime);
+		Particle *p = *i;
+		p->Update(frametime);
 
-		if (!p.IsAlive()) {
+		if (!p->IsAlive() || p->GetPosition().x() < 0 || p->GetPosition().x() > this->width ||
+			p->GetPosition().y() < 0 || p->GetPosition().y() > this->height) {
 			i = list.erase(i);
 			if (i == list.end())
 				break;
@@ -26,12 +27,12 @@ void ParticleSystem::Update(float frametime) {
 }
 
 void ParticleSystem::Render() {
-    for (Particle &p : list) {
-		p.Render();
+    for (Particle *p : list) {
+		p->Render();
 	}
 }
 
-void ParticleSystem::Add(const Particle &p) {
+void ParticleSystem::Add(Particle *p) {
 	list.push_back(p);
 }
 

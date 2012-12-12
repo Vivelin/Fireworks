@@ -118,18 +118,22 @@ void Fireworks::AddRandomParticle() {
 
 	Vector2 initialSpeed = Vector2(0.0f, -20.0f); // Particles have some initial speed
 	Vector2 force = Vector2(0.0f, -15.0f); // Particles move downwards
-	particles->Add(Particle(pos, color, size, initialSpeed, force));
+
+	Particle *p = new Particle(pos, color, size, initialSpeed, force);
+	particles->Add(p);
 }
 
 void Fireworks::AddSpawner() {
-	Vector2 pos((float)(rand() % this->width), this->height);
+	Vector2 pos((float)(rand() % this->width), (float)this->height);
 
 	static double h = (rand() % 6) * 60;
 	Color color(h, 1.0f, 0.5f);
 
-	float size = 50.0f;
+	float size = 15.0f;
 
 	Vector2 initialSpeed = Vector2(0.0f, 0.0f);
 	Vector2 force = Vector2(0.0f, 10.0f);
-	particles->Add(SpawnerParticle(pos, color, size, initialSpeed, force));
+
+	SpawnerParticle *p = new SpawnerParticle(pos, color, size, initialSpeed, force);
+	particles->Add(p);
 }
