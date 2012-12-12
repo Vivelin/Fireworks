@@ -21,6 +21,9 @@ public:
     void SetParticleLimit(size_t maxParticles);
     size_t GetParticleLimit() const;
 
+	void AddRandomParticle();
+	void AddSpawner();
+
 private:
 	sf::Window *window;
 	ParticleSystem *particles;

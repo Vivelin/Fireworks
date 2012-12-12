@@ -1,6 +1,11 @@
 #pragma once
 #include "Libs.h"
 
+enum ParticleType {
+	Spark,
+	Spawner
+};
+
 class Particle {
 public:
 	Particle();
@@ -9,6 +14,8 @@ public:
 	Particle(Vector2 position, Color color, float size);
 	Particle(Vector2 position, Color color, float size, Vector2 speed);
 	Particle(Vector2 position, Color color, float size, Vector2 speed, Vector2 force);
+
+	virtual ParticleType GetType() const;
 
     Vector2 GetPosition() const;
     void SetPosition(const Vector2 &v);
@@ -32,9 +39,20 @@ protected:
 	Vector2 force;
 	Vector2 speed;
 	Vector2 acceleration;
+
+	virtual void DoPhysics(float frametime);
 };
 
 class SpawnerParticle : public Particle {
 public:
+	SpawnerParticle();
+	SpawnerParticle(Vector2 position);
+	SpawnerParticle(Vector2 position, Color color);
+	SpawnerParticle(Vector2 position, Color color, float size);
+	SpawnerParticle(Vector2 position, Color color, float size, Vector2 speed);
+	SpawnerParticle(Vector2 position, Color color, float size, Vector2 speed, Vector2 force);
+
+	ParticleType GetType() const;
+
 	void Update(float frametime);
 };
